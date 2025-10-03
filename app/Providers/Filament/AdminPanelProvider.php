@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers\Filament;
 
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Http\Middleware\Authenticate;
@@ -61,8 +62,16 @@ class AdminPanelProvider extends PanelProvider
                             ->icon('fab-google')
                             ->label('Google')
                             ->visible(true),
-                    ])->registration(true)
-                ,
-            ]);
+                    ])->registration(true),
+                EasyFooterPlugin::make()
+                    ->withSentence('revan.dev')
+                    ->withLogo(
+                        'https://static.cdnlogo.com/logos/l/23/laravel.svg', // Path to logo
+                        'https://laravel.com',                               // URL for logo link (optional)
+                        'dibuat dengan Laravel',                             // Text to display (optional)
+                        24                                                   // Logo height in pixels (default: 20)
+                    ),
+            ])
+            ->viteTheme('resources/css/filament/admin/theme.css');
     }
 }
