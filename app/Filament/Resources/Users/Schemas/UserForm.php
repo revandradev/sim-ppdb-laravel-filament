@@ -23,7 +23,6 @@ class UserForm
                     ->multiple()
                     ->preload()
                     ->searchable(),
-
                 DateTimePicker::make('email_verified_at'),
                 TextInput::make('password')
                     ->password()
