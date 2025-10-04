@@ -20,6 +20,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+use lockscreen\FilamentLockscreen\Lockscreen;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -29,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->profile()
             ->login()
             ->colors([
                 'primary' => Color::Amber,
@@ -54,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                Locker::class,
             ])
             ->plugins([
                 FilamentSocialitePlugin::make()
@@ -71,6 +75,11 @@ class AdminPanelProvider extends PanelProvider
                         'dibuat dengan Laravel',                             // Text to display (optional)
                         24                                                   // Logo height in pixels (default: 20)
                     ),
+                Lockscreen::make()
+                    ->disableDisplayName()
+                    ->enableIdleTimeout()
+                    ->enableRateLimit()
+                    ->enablePlugin(true),
             ])
             ->viteTheme('resources/css/filament/admin/theme.css');
     }
