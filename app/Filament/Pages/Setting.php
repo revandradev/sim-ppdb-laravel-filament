@@ -9,12 +9,16 @@ use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use UnitEnum;
 
 class Setting extends SettingsPage
 {
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
-    protected static string $settings = GeneralSetting::class;
+    protected static string $settings     = GeneralSetting::class;
+    protected static ?int $navigationSort = 2;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Pengaturan'; // Tambahkan ini
 
     public function form(Schema $schema): Schema
     {
