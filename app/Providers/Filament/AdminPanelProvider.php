@@ -2,6 +2,7 @@
 namespace App\Providers\Filament;
 
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Http\Middleware\Authenticate;
@@ -61,6 +62,7 @@ class AdminPanelProvider extends PanelProvider
                 Locker::class,
             ])
             ->plugins([
+                FilamentShieldPlugin::make(),
                 FilamentSocialitePlugin::make()
                     ->providers([
                         Provider::make('google')
