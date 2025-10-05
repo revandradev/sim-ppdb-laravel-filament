@@ -10,7 +10,6 @@ use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use UnitEnum;
 
 class Setting extends SettingsPage
@@ -35,13 +34,32 @@ class Setting extends SettingsPage
                         FileUpload::make('site_logo')
                             ->label('Logo Situs')
                             ->image()
+                            ->previewable(false)
+                            ->visibility('public')
                             ->directory('site-logos')
                             ->maxSize(1024) // Maksimum ukuran file dalam KB
                             ->nullable()
-                            ->visibility('public')
+                            ->imageEditor()
                             ->getUploadedFileNameForStorageUsing(
-                                fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                                    ->prepend('site-logo.'),
+                                function ($file) {
+                                    $extension = $file->getClientOriginalExtension();
+                                    return 'logo_situs.' . $extension;
+                                }
+                            ),
+                        FileUpload::make('site_favicon')
+                            ->label('Favicon Situs')
+                            ->image()
+                            ->previewable(false)
+                            ->visibility('public')
+                            ->directory('site-favicons')
+                            ->maxSize(1024) // Maksimum ukuran file dalam KB
+                            ->nullable()
+                            ->imageEditor()
+                            ->getUploadedFileNameForStorageUsing(
+                                function ($file) {
+                                    $extension = $file->getClientOriginalExtension();
+                                    return 'logo_favicons.' . $extension;
+                                }
                             ),
                         Textarea::make('site_description')
                             ->label('Deskripsi Situs')

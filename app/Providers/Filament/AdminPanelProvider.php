@@ -1,8 +1,9 @@
 <?php
 namespace App\Providers\Filament;
 
-use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+use App\Settings\GeneralSetting;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Http\Middleware\Authenticate;
@@ -28,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        $setting = app(GeneralSetting::class);
         return $panel
             ->default()
             ->id('admin')
@@ -35,6 +37,10 @@ class AdminPanelProvider extends PanelProvider
             ->profile(isSimple: false)
             ->login()
             ->globalSearch(true)
+            ->brandName($setting->site_name ?? 'Backoffice')
+            ->brandLogo($setting->site_logo ? asset('storage/' . $setting->site_logo) : null)
+            ->brandLogoHeight('3rem')
+            ->favicon($setting->site_favicon ? asset('storage/' . $setting->site_favicon) : null)
             ->colors([
                 'primary' => Color::Amber,
             ])
