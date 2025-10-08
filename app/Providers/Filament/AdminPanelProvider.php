@@ -2,6 +2,7 @@
 namespace App\Providers\Filament;
 
 use App\Settings\GeneralSetting;
+use Awcodes\StickyHeader\StickyHeaderPlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
@@ -68,6 +69,8 @@ class AdminPanelProvider extends PanelProvider
                 Locker::class,
             ])
             ->plugins([
+                StickyHeaderPlugin::make()
+                    ->floating(),
                 FilamentShieldPlugin::make(),
                 FilamentSocialitePlugin::make()
                     ->providers([
