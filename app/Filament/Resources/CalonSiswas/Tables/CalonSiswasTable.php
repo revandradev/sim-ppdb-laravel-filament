@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\CalonSiswas\Tables;
 
 use Filament\Actions\BulkActionGroup;
@@ -7,6 +6,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class CalonSiswasTable
@@ -17,6 +17,8 @@ class CalonSiswasTable
             ->columns([
                 TextColumn::make('nama_lengkap')
                     ->searchable(),
+                ToggleColumn::make('is_verified')
+                    ->label('Terverifikasi'),
                 TextColumn::make('nisn')
                     ->searchable(),
                 TextColumn::make('tempat_lahir')

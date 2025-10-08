@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Filament\Resources\CalonSiswas\Pages;
 
 use App\Filament\Resources\CalonSiswas\CalonSiswaResource;
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListCalonSiswas extends ListRecords
@@ -13,7 +11,7 @@ class ListCalonSiswas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            // CreateAction::make(),
         ];
     }
 }
