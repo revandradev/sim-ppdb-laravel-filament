@@ -2,7 +2,6 @@
 namespace App\Providers\Filament;
 
 use App\Settings\GeneralSetting;
-use Awcodes\StickyHeader\StickyHeaderPlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
@@ -39,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->globalSearch(true)
             ->brandName($setting->site_name ?? 'Backoffice')
-            ->brandLogo($setting->site_logo ? asset('storage/' . $setting->site_logo) : null)
+            // ->brandLogo($setting->site_logo ? asset('storage/' . $setting->site_logo) : null)
             ->brandLogoHeight('3rem')
             ->favicon($setting->site_favicon ? asset('storage/' . $setting->site_favicon) : null)
             ->colors([
@@ -69,8 +68,8 @@ class AdminPanelProvider extends PanelProvider
                 Locker::class,
             ])
             ->plugins([
-                StickyHeaderPlugin::make()
-                    ->floating(),
+                // StickyHeaderPlugin::make()
+                //     ->floating(),
                 FilamentShieldPlugin::make(),
                 FilamentSocialitePlugin::make()
                     ->providers([
