@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->profile(isSimple: false)
             ->login()
             ->globalSearch(true)
+            ->sidebarCollapsibleOnDesktop()
             ->brandName($setting->site_name ?? 'Backoffice')
             // ->brandLogo($setting->site_logo ? asset('storage/' . $setting->site_logo) : null)
             ->brandLogoHeight('3rem')
