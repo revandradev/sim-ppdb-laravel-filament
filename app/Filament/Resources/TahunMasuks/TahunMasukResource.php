@@ -11,6 +11,7 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
@@ -27,10 +28,10 @@ class TahunMasukResource extends Resource
     {
         return $schema
             ->components([
-                TextInput::make('tahun')
-                    ->required(),
-                Toggle::make('is_aktif')
-                    ->required(),
+                Grid::make()->columnSpanFull()->schema([
+                    TextInput::make('tahun')->required()->columnSpan(12), // Mengisi 6 dari 12 kolom
+                    Toggle::make('is_aktif')->columnSpan(12),             // Mengisi 6 dari 12 kolom
+                ]),
             ]);
     }
 

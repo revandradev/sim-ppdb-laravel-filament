@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\TahunMasuks\Pages;
 
 use App\Filament\Resources\TahunMasuks\TahunMasukResource;
@@ -13,7 +12,7 @@ class ManageTahunMasuks extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()->modalWidth('md'),
         ];
     }
 }
