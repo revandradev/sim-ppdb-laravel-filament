@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\CalonSiswas;
 
 use App\Filament\Resources\CalonSiswas\Pages\CreateCalonSiswa;
@@ -18,7 +17,8 @@ use Filament\Tables\Table;
 
 class CalonSiswaResource extends Resource
 {
-    protected static ?string $model = CalonSiswa::class;
+    protected static ?string $model                 = CalonSiswa::class;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -49,10 +49,10 @@ class CalonSiswaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListCalonSiswas::route('/'),
+            'index'  => ListCalonSiswas::route('/'),
             'create' => CreateCalonSiswa::route('/create'),
-            'view' => ViewCalonSiswa::route('/{record}'),
-            'edit' => EditCalonSiswa::route('/{record}/edit'),
+            'view'   => ViewCalonSiswa::route('/{record}'),
+            'edit'   => EditCalonSiswa::route('/{record}/edit'),
         ];
     }
 }
