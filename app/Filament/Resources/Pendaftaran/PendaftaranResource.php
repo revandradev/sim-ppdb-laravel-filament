@@ -1,14 +1,13 @@
 <?php
+namespace App\Filament\Resources\pendaftaran;
 
-namespace App\Filament\Resources\Pendaftarans;
-
-use App\Filament\Resources\Pendaftarans\Pages\CreatePendaftaran;
-use App\Filament\Resources\Pendaftarans\Pages\EditPendaftaran;
-use App\Filament\Resources\Pendaftarans\Pages\ListPendaftarans;
-use App\Filament\Resources\Pendaftarans\Pages\ViewPendaftaran;
-use App\Filament\Resources\Pendaftarans\Schemas\PendaftaranForm;
-use App\Filament\Resources\Pendaftarans\Schemas\PendaftaranInfolist;
-use App\Filament\Resources\Pendaftarans\Tables\PendaftaransTable;
+use App\Filament\Resources\pendaftaran\Pages\CreatePendaftaran;
+use App\Filament\Resources\pendaftaran\Pages\EditPendaftaran;
+use App\Filament\Resources\pendaftaran\Pages\Listpendaftaran;
+use App\Filament\Resources\pendaftaran\Pages\ViewPendaftaran;
+use App\Filament\Resources\pendaftaran\Schemas\PendaftaranForm;
+use App\Filament\Resources\pendaftaran\Schemas\PendaftaranInfolist;
+use App\Filament\Resources\pendaftaran\Tables\pendaftaranTable;
 use App\Models\Pendaftaran;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -38,7 +37,7 @@ class PendaftaranResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return PendaftaransTable::configure($table);
+        return pendaftaranTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -51,10 +50,10 @@ class PendaftaranResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListPendaftarans::route('/'),
+            'index'  => Listpendaftaran::route('/'),
             'create' => CreatePendaftaran::route('/create'),
-            'view' => ViewPendaftaran::route('/{record}'),
-            'edit' => EditPendaftaran::route('/{record}/edit'),
+            'view'   => ViewPendaftaran::route('/{record}'),
+            'edit'   => EditPendaftaran::route('/{record}/edit'),
         ];
     }
 

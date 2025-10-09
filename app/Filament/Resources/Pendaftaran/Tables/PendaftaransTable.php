@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Resources\Pendaftarans\Tables;
+namespace App\Filament\Resources\pendaftaran\Tables;
 
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -10,7 +10,7 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class PendaftaransTable
+class pendaftaranTable
 {
     public static function configure(Table $table): Table
     {

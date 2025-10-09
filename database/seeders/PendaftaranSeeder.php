@@ -4,7 +4,7 @@ namespace Database\Seeders;
 use App\Models\Pendaftaran;
 use Illuminate\Database\Seeder;
 
-class PendaftaranSeeder extends Seeder
+class pendaftaraneeder extends Seeder
 {
     /**
      * Run the database seeds.

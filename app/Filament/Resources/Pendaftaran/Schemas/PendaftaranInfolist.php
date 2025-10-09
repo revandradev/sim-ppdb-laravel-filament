@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Resources\Pendaftarans\Schemas;
+namespace App\Filament\Resources\pendaftaran\Schemas;
 
 use App\Models\Pendaftaran;
 use Filament\Infolists\Components\TextEntry;

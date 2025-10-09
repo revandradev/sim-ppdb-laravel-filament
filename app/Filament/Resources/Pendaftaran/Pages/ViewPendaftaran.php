@@ -1,8 +1,7 @@
 <?php
+namespace App\Filament\Resources\pendaftaran\Pages;
 
-namespace App\Filament\Resources\Pendaftarans\Pages;
-
-use App\Filament\Resources\Pendaftarans\PendaftaranResource;
+use App\Filament\Resources\pendaftaran\PendaftaranResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 

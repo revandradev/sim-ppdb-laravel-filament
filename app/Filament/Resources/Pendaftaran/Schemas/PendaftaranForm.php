@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Resources\Pendaftarans\Schemas;
+namespace App\Filament\Resources\pendaftaran\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
