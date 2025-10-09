@@ -29,8 +29,17 @@ class TahunMasukResource extends Resource
         return $schema
             ->components([
                 Grid::make()->columnSpanFull()->schema([
-                    TextInput::make('tahun')->required()->columnSpan(12), // Mengisi 6 dari 12 kolom
-                    Toggle::make('is_aktif')->columnSpan(12),             // Mengisi 6 dari 12 kolom
+                    TextInput::make('tahun')
+                        ->markAsRequired()
+                        ->rules(['required', 'max:4', 'numeric'])
+                        ->validationMessages([
+                            'required' => 'Kolom :attribute wajib di isi',
+                            'max'      => 'Maksimal :attribute adalah 4 karakter',
+                            'numeric'  => 'Kolom :attribute harus berupa angka',
+                        ])
+
+                        ->columnSpan(12),                         // Mengisi 6 dari 12 kolom
+                    Toggle::make('is_aktif')->columnSpan(12), // Mengisi 6 dari 12 kolom
                 ]),
             ]);
     }
