@@ -20,7 +20,7 @@ class Siswa extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'calon_siswa_id',
+        'pendaftaran_id',
         'tahun_masuk',
         'nama_lengkap',
         'nisn',
@@ -29,8 +29,8 @@ class Siswa extends Model
     /**
      * Get the calon siswa associated with the siswa.
      */
-    public function calonSiswa(): BelongsTo
+    public function pendaftaran(): BelongsTo
     {
-        return $this->belongsTo(CalonSiswa::class, 'calon_siswa_id');
+        return $this->belongsTo(Pendaftaran::class, 'pendaftaran_id', 'id');
     }
 }

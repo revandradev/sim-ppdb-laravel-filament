@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\Siswas\Tables;
 
 use Filament\Actions\BulkActionGroup;
@@ -8,6 +7,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
@@ -17,7 +17,18 @@ class SiswasTable
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('tahun_masuk')
+                    ->label('Tahun Masuk')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('nama_lengkap')
+                    ->label('Nama Lengkap')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('nisn')
+                    ->label('NISN')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 TrashedFilter::make(),
