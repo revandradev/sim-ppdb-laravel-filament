@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pendaftaran_id')->unique();
+            $table->unsignedBigInteger('pendaftaran_id');
             $table->year('tahun_masuk')->default(date('Y'));
             $table->foreign('pendaftaran_id')->references('id')->on('pendaftaran')->onDelete('cascade');
             $table->string('nama_lengkap');
