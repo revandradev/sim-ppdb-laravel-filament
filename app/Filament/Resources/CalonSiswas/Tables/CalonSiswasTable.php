@@ -25,6 +25,7 @@ class CalonSiswasTable
                 TextColumn::make('nisn')
                     ->searchable(),
                 TextColumn::make('tempat_lahir')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('tanggal_lahir')
                     ->date()
