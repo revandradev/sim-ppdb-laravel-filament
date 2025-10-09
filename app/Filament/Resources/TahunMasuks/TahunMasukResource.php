@@ -14,8 +14,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class TahunMasukResource extends Resource
@@ -50,18 +50,21 @@ class TahunMasukResource extends Resource
             ->columns([
                 TextColumn::make('tahun')
                     ->label('Tahun Masuk')
-                    ->searchable(),
-                IconColumn::make('is_aktif')
-                    ->label('Aktif')
-                    ->boolean(),
+                    ->searchable()
+                    ->width('20%'),
+                ToggleColumn::make('is_aktif')
+                    ->label('Aktif'),
+                // IconColumn::make('is_aktif')
+                //     ->label('Aktif')
+                //     ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Dibuat')
+                    ->dateTime('d M Y H:i')
+                    ->sortable(),
                 TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Terakhir Diperbarui')
+                    ->dateTime('d M Y H:i')
+                    ->sortable(),
             ])
             ->filters([
                 //
