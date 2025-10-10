@@ -3,6 +3,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Pendaftaran;
 use App\Models\Siswa;
+use App\Models\Tarif;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -17,7 +18,8 @@ class PendaftaranOverview extends StatsOverviewWidget
 
         $jumlahPendaftaranTahunIni = Pendaftaran::whereYear('created_at', $tahun)->count();
         $jumlahSiswaTahunIni       = Siswa::where('tahun_masuk', $tahun)->count();
-        $pendapatan                = $jumlahSiswaTahunIni * 200_000;
+        $tarif                     = Tarif::where('is_active', true)->where('kode_tarif', 'KD01')->first();
+        $pendapatan                = $jumlahSiswaTahunIni * ($tarif ? $tarif->jumlah : 0);
 
         return [
             Stat::make('Pendaftaran Tahun Ini', $jumlahPendaftaranTahunIni)
