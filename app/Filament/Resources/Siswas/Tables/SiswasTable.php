@@ -21,11 +21,14 @@ class SiswasTable
                 TextColumn::make('tahun_masuk')
                     ->label('Tahun Masuk')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->width('10%'),
                 TextColumn::make('nisn')
                     ->label('Nomor Induk Siswa Nasional (NISN)')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->width('10%')
+                    ->wrap(),
                 TextColumn::make('nama_lengkap')
                     ->label('Nama Lengkap')
                     ->sortable()
@@ -36,6 +39,7 @@ class SiswasTable
                     ->searchable(),
 
             ])
+            ->defaultSort('nama_lengkap', 'desc')
             ->filters([
                 TrashedFilter::make(),
             ])
