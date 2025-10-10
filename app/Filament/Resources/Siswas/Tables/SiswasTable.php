@@ -1,9 +1,11 @@
 <?php
 namespace App\Filament\Resources\Siswas\Tables;
 
+use App\Filament\Exports\SiswaExporter;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ExportAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
@@ -42,6 +44,10 @@ class SiswasTable
             ->defaultSort('nama_lengkap', 'desc')
             ->filters([
                 TrashedFilter::make(),
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(SiswaExporter::class),
             ])
             ->recordActions([
                 ViewAction::make(),

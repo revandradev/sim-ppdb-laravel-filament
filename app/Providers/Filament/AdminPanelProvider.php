@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->databaseNotifications()
             ->profile(isSimple: false)
             ->login()
             ->globalSearch(true)

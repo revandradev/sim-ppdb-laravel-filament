@@ -24,6 +24,7 @@ class ListSiswas extends ListRecords
                 })
                 ->modalWidth(Width::ThreeExtraLarge)
                 ->slideOver(),
+
         ];
     }
     public function getTabs(): array
