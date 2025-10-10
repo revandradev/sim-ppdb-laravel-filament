@@ -13,8 +13,24 @@ class SiswaForm
     {
         return $schema
             ->components([
+                TextInput::make('nisn')
+                    ->label('Nomor Induk Siswa Nasional (NISN)')
+                    ->rules(fn($record) => [
+                        'required',
+                        'unique:siswa,nisn,' . ($record?->id ?? 'NULL'),
+                    ])
+                    ->validationMessages([
+                        'required' => 'Kolom nomor induk siswa nasional (NISN) wajib diisi.',
+                        'unique'   => 'Kolom nomor induk siswa nasional (NISN) sudah terdaftar.',
+                    ])
+                    ->numeric()
+                    ->maxLength(20),
                 Select::make('pendaftaran_id')
                     ->label('Pendaftaran')
+                    ->rules(['required'])
+                    ->validationMessages([
+                        'required' => 'Kolom pendaftaran wajib dipilih.',
+                    ])
                     ->options(
                         Pendaftaran::query()
                             ->where('is_verified', true)
@@ -27,6 +43,10 @@ class SiswaForm
                     ->required(),
                 Select::make('tahun_masuk')
                     ->label('Tahun Masuk')
+                    ->rules(['required'])
+                    ->validationMessages([
+                        'required' => 'Kolom tahun masuk wajib dipilih.',
+                    ])
                     ->options(
                         \App\Models\TahunMasuk::query()
                             ->where('is_aktif', true)
@@ -37,18 +57,6 @@ class SiswaForm
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('tahun_masuk', $state);
                     }),
-                TextInput::make('nisn')
-                    ->label('NISN')
-                    ->rules(fn($record) => [
-                        'required',
-                        'unique:siswa,nisn,' . ($record?->id ?? 'NULL'),
-                    ])
-                    ->validationMessages([
-                        'required' => 'Kolom :attribute wajib diisi.',
-                        'unique'   => 'Kolom :attribute sudah terdaftar.',
-                    ])
-                    ->numeric()
-                    ->maxLength(20),
             ]);
     }
 }
