@@ -29,9 +29,9 @@ class ListSiswas extends ListRecords
     public function getTabs(): array
     {
         return [
-            'Aktif'   => Tab::make()
+            'Tahun Ajar Sekarang' => Tab::make()
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('tahun_masuk', date('Y'))),
-            'Riwayat' => Tab::make(),
+            'Riwayat'             => Tab::make(),
         ];
     }
 }
