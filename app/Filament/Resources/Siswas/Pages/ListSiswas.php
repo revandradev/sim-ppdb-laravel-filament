@@ -15,7 +15,7 @@ class ListSiswas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()
+            CreateAction::make()->label('Verifikasi Siswa')
                 ->mutateDataUsing(function (array $data) {
                     if (isset($data['pendaftaran_id'])) {
                         $data['nama_lengkap'] = \App\Models\Pendaftaran::find($data['pendaftaran_id'])?->nama_lengkap;
