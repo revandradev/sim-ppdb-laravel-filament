@@ -13,7 +13,15 @@ class ListSiswas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()->modalWidth(Width::ThreeExtraLarge),
+            CreateAction::make()
+                ->mutateDataUsing(function (array $data) {
+                    if (isset($data['pendaftaran_id'])) {
+                        $data['nama_lengkap'] = \App\Models\Pendaftaran::find($data['pendaftaran_id'])?->nama_lengkap;
+                    }
+                    return $data;
+                })
+                ->modalWidth(Width::ThreeExtraLarge)
+                ->slideOver(),
         ];
     }
 }

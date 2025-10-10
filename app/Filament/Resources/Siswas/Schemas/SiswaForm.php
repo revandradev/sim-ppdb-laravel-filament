@@ -6,13 +6,11 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Facades\Log;
 
 class SiswaForm
 {
     public static function configure(Schema $schema): Schema
     {
-        Log::info('Configuring SiswaForm schema');
         return $schema
             ->components([
                 Select::make('pendaftaran_id')
@@ -26,10 +24,7 @@ class SiswaForm
                             ])
                     )
                     ->searchable()
-                    ->required()
-                    ->afterStateUpdated(function (Set $set, ?string $state) {
-                        $set('nama_lengkap', $state ? Pendaftaran::find($state)?->nama_lengkap : null);
-                    }),
+                    ->required(),
                 Select::make('tahun_masuk')
                     ->label('Tahun Masuk')
                     ->options(
@@ -42,11 +37,6 @@ class SiswaForm
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('tahun_masuk', $state);
                     }),
-                TextInput::make('nama_lengkap')
-                    ->label('Nama Lengkap')
-                // ->required()
-                    ->maxLength(255),
-                // ->formatStateUsing(fn(string $state): string => ucwords($state)),
                 TextInput::make('nisn')
                     ->label('NISN')
                     ->rules(fn($record) => [
