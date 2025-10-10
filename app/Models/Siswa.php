@@ -24,6 +24,9 @@ class Siswa extends Model
         'tahun_masuk',
         'nama_lengkap',
         'nisn',
+        'verifikator',
+        'foto',
+        'wali',
     ];
 
     /**

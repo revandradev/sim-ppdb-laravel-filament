@@ -2,10 +2,12 @@
 namespace App\Filament\Resources\Siswas\Schemas;
 
 use App\Models\Pendaftaran;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaForm
 {
@@ -39,6 +41,7 @@ class SiswaForm
                                 $item->id => "{$item->nama_lengkap} - {$item->nisn}",
                             ])
                     )
+                    ->disabled(fn($record) => $record !== null)
                     ->searchable()
                     ->required(),
                 Select::make('tahun_masuk')
@@ -57,6 +60,22 @@ class SiswaForm
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('tahun_masuk', $state);
                     }),
+                TextInput::make('wali')
+                    ->label('Nama Wali')
+                    ->nullable()
+                    ->maxLength(255),
+                TextInput::make('verifikator')
+                    ->label('Nama Verifikator')
+                    ->disabled()
+                    ->dehydrated(true)
+                    ->default(fn() => Auth::user()?->name)
+                    ->maxLength(255),
+                FileUpload::make('foto')
+                    ->label('Foto')
+                    ->avatar()
+                    ->visibility('public')
+                    ->directory('siswa/foto')
+                    ->nullable(),
             ]);
     }
 }

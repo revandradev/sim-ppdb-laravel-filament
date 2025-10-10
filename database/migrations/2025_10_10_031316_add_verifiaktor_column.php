@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('siswa', function (Blueprint $table) {
-            $table->string('verifiaktor')->nullable()->after('nisn');
-            $table->string('foto')->nullable()->after('verifiaktor');
+            $table->string('verifikator')->nullable()->after('nisn');
+            $table->string('foto')->nullable()->after('verifikator');
             $table->string('wali')->nullable()->after('foto');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('siswa', function (Blueprint $table) {
-            $table->dropColumn(['foto', 'wali', 'verifiaktor']);
+            $table->dropColumn(['foto', 'wali', 'verifikator']);
         });
     }
 };
