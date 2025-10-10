@@ -2,7 +2,6 @@
 namespace App\Filament\Resources\Siswas\Schemas;
 
 use App\Models\Pendaftaran;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Utilities\Set;
@@ -31,13 +30,18 @@ class SiswaForm
                     ->afterStateUpdated(function (Set $set, ?string $state) {
                         $set('nama_lengkap', $state ? Pendaftaran::find($state)?->nama_lengkap : null);
                     }),
-                DatePicker::make('tahun_masuk')
+                Select::make('tahun_masuk')
                     ->label('Tahun Masuk')
-                    ->native(false)
-                    ->displayFormat('Y')
-                    ->format('Y')
-                    ->default(now()->year)
-                    ->required(),
+                    ->options(
+                        \App\Models\TahunMasuk::query()
+                            ->where('is_aktif', true)
+                            ->pluck('tahun', 'tahun')
+                    )
+                    ->searchable()
+                    ->required()
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
+                        $set('tahun_masuk', $state);
+                    }),
                 TextInput::make('nama_lengkap')
                     ->label('Nama Lengkap')
                 // ->required()
@@ -45,7 +49,14 @@ class SiswaForm
                 // ->formatStateUsing(fn(string $state): string => ucwords($state)),
                 TextInput::make('nisn')
                     ->label('NISN')
-                    ->required()
+                    ->rules(fn($record) => [
+                        'required',
+                        'unique:siswa,nisn,' . ($record?->id ?? 'NULL'),
+                    ])
+                    ->validationMessages([
+                        'required' => 'Kolom :attribute wajib diisi.',
+                        'unique'   => 'Kolom :attribute sudah terdaftar.',
+                    ])
                     ->numeric()
                     ->maxLength(20),
             ]);

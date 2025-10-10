@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Filament\Resources\Siswas;
 
-use App\Filament\Resources\Siswas\Pages\CreateSiswa;
 use App\Filament\Resources\Siswas\Pages\EditSiswa;
 use App\Filament\Resources\Siswas\Pages\ListSiswas;
 use App\Filament\Resources\Siswas\Pages\ViewSiswa;
@@ -52,9 +50,9 @@ class SiswaResource extends Resource
     {
         return [
             'index' => ListSiswas::route('/'),
-            'create' => CreateSiswa::route('/create'),
-            'view' => ViewSiswa::route('/{record}'),
-            'edit' => EditSiswa::route('/{record}/edit'),
+            // 'create' => CreateSiswa::route('/create'),
+            'view'  => ViewSiswa::route('/{record}'),
+            'edit'  => EditSiswa::route('/{record}/edit'),
         ];
     }
 

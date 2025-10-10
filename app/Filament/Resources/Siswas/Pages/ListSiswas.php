@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Siswas\Pages;
 use App\Filament\Resources\Siswas\SiswaResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\Width;
 
 class ListSiswas extends ListRecords
 {
@@ -12,7 +13,7 @@ class ListSiswas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()->modalWidth(Width::ThreeExtraLarge),
         ];
     }
 }
