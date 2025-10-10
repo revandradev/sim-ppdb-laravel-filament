@@ -17,6 +17,28 @@ class SiswaForm
             ->components([
                 TextInput::make('nisn')
                     ->label('Nomor Induk Siswa Nasional (NISN)')
+                    ->default(function () {
+                        $tahun = now()->format('y'); // 2 digit tahun
+                        $bulan = now()->format('m'); // 2 digit bulan
+
+                        // Prefix hanya tahun
+                        $prefix = $tahun;
+
+                        // Cari increment terakhir untuk tahun ini (abaikan bulan)
+                        $lastNisn = \App\Models\Siswa::where('nisn', 'like', $prefix . '%')
+                            ->orderByDesc('nisn')
+                            ->value('nisn');
+
+                        if ($lastNisn) {
+                            // Ambil 4 digit terakhir sebagai increment
+                            $increment = (int) substr($lastNisn, 4) + 1;
+                        } else {
+                            $increment = 1;
+                        }
+
+                        // Gabungkan: tahun + bulan + increment (4 digit)
+                        return $tahun . $bulan . str_pad($increment, 4, '0', STR_PAD_LEFT);
+                    })
                     ->rules(fn($record) => [
                         'required',
                         'unique:siswa,nisn,' . ($record?->id ?? 'NULL'),
@@ -26,7 +48,10 @@ class SiswaForm
                         'unique'   => 'Kolom nomor induk siswa nasional (NISN) sudah terdaftar.',
                     ])
                     ->numeric()
-                    ->maxLength(20),
+                    ->disabled()
+                    ->maxLength(20)
+                // ->disabled(fn($record) => $record !== null)
+                    ->dehydrated(true),
                 Select::make('pendaftaran_id')
                     ->label('Pendaftaran')
                     ->rules(['required'])
