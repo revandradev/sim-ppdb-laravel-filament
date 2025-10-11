@@ -1,6 +1,8 @@
 <?php
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\StatusPendaftaranOverview;
+use App\Filament\Widgets\StatusPendaftaranTable;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -35,7 +37,8 @@ class PendaftaranPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(app_path('Filament/Pendaftaran/Widgets'), 'App\Filament\Pendaftaran\Widgets')
             ->widgets([
-
+                StatusPendaftaranOverview::class,
+                StatusPendaftaranTable::class,
             ])
             ->middleware([
                 EncryptCookies::class,

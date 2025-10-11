@@ -21,6 +21,17 @@ class Pendaftaran extends Model
         'nama_ibu',
         'no_hp_ortu',
         'asal_sekolah',
+        'foto',
+        'user_pendaftaran_id',
+        'is_verified',
     ];
 
+    public function userPendaftaran()
+    {
+        return $this->belongsTo(UserPendaftaran::class, 'user_pendaftaran_id');
+    }
+    public function getStatusAttribute()
+    {
+        return $this->is_verified ? 'Diterima' : 'Belum Diterima';
+    }
 }
