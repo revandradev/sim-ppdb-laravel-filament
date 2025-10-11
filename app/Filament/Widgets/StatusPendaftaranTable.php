@@ -8,6 +8,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class StatusPendaftaranTable extends TableWidget
 {
@@ -16,7 +17,7 @@ class StatusPendaftaranTable extends TableWidget
     public function table(Table $table): Table
     {
         return $table
-            ->query(fn(): Builder => Pendaftaran::query())
+            ->query(fn(): Builder => Pendaftaran::query()->where('user_pendaftaran_id', Auth::id()))
             ->columns([
                 TextColumn::make('nama_lengkap')->label('Nama Lengkap')->searchable()->sortable(),
                 TextColumn::make('nisn')->label('NISN')->searchable()->sortable(),

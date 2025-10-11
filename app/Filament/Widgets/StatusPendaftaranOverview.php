@@ -12,9 +12,10 @@ class StatusPendaftaranOverview extends StatsOverviewWidget
     protected function getStats(): array
     {
         $pendaftaran = Pendaftaran::query()->where('user_pendaftaran_id', Auth::id())->first();
-        $deskripsi   = $pendaftaran->is_verified ? "selamat, pendaftaran anda diterima" : "maaf, pendaftaran anda belum diterima";
+        $status      = $pendaftaran ? ($pendaftaran->is_verified ? "Diterima" : "Belum Diterima") : "Belum mendaftar";
+        $deskripsi   = $pendaftaran ? ($pendaftaran->is_verified ? "selamat, pendaftaran anda diterima" : "maaf, pendaftaran anda belum diterima") : "Pendaftaran tidak ditemukan";
         return [
-            Stat::make('Status Pendaftaran', $pendaftaran->status)
+            Stat::make('Status Pendaftaran', $status)
                 ->description($deskripsi)
                 ->color(Color::Blue)
             // ->descriptionIcon('heroicon-m-arrow-trending-up')
