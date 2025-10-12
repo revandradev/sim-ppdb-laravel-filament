@@ -36,6 +36,6 @@ class Pendaftaran extends Model
     }
     public function getStatusApprovalAttribute()
     {
-        return $this->is_approved ? 'Diterima' : 'Belum Diterima';
+        return $this->is_approved ? 'Diterima' : 'Menunggu hasil';
     }
 }
