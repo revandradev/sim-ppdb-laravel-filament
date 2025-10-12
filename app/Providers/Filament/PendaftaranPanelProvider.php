@@ -30,6 +30,7 @@ class PendaftaranPanelProvider extends PanelProvider
             ])
             ->login()
             ->registration()
+            ->profile(isSimple: false)
             ->discoverResources(app_path('Filament/Pendaftaran/Resources'), 'App\Filament\Pendaftaran\Resources')
             ->discoverPages(app_path('Filament/Pendaftaran/Pages'), 'App\Filament\Pendaftaran\Pages')
             ->pages([

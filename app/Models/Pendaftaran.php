@@ -30,8 +30,12 @@ class Pendaftaran extends Model
     {
         return $this->belongsTo(UserPendaftaran::class, 'user_pendaftaran_id');
     }
-    public function getStatusAttribute()
+    public function getStatusVerifikasiAttribute()
     {
-        return $this->is_verified ? 'Diterima' : 'Belum Diterima';
+        return $this->is_verified ? 'Terverifikasi' : 'Belum diverifikasi';
+    }
+    public function getStatusApprovalAttribute()
+    {
+        return $this->is_approved ? 'Diterima' : 'Belum Diterima';
     }
 }

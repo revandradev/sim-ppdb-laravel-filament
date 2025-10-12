@@ -3,7 +3,6 @@ namespace App\Filament\Widgets;
 
 use App\Models\Pendaftaran;
 use Filament\Actions\BulkActionGroup;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
@@ -19,16 +18,16 @@ class StatusPendaftaranTable extends TableWidget
         return $table
             ->query(fn(): Builder => Pendaftaran::query()->where('user_pendaftaran_id', Auth::id()))
             ->columns([
-                TextColumn::make('nama_lengkap')->label('Nama Lengkap')->searchable()->sortable(),
                 TextColumn::make('nisn')->label('NISN')->searchable()->sortable(),
+                TextColumn::make('nama_lengkap')->label('Nama Lengkap')->searchable()->sortable(),
                 TextColumn::make('tempat_lahir')->label('Tempat Lahir')->searchable(),
                 TextColumn::make('tanggal_lahir')->label('Tanggal Lahir')->date('d-m-Y')->sortable(),
                 TextColumn::make('jenis_kelamin')->label('Jenis Kelamin')
                     ->formatStateUsing(fn($state) => $state === 'L' ? 'Laki-laki' : ($state === 'P' ? 'Perempuan' : '-')),
-                TextColumn::make('alamat')->label('Alamat')->limit(30),
-                ImageColumn::make('foto')->label('Foto')->circular(),
-                TextColumn::make('status')->label('Status')->badge()
+                TextColumn::make('status_verifikasi')->label('Pendaftaran')->badge()
                     ->color(fn($record) => $record->is_verified ? 'success' : 'gray'),
+                TextColumn::make('status_approval')->label('Penerimaan')->badge()
+                    ->color(fn($record) => $record->is_approved ? 'success' : 'gray'),
             ])
             ->filters([
                 //
