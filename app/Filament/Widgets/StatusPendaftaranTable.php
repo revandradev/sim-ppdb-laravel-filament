@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class StatusPendaftaranTable extends TableWidget
 {
     protected int|string|array $columnSpan = 'full';
+    protected static ?string $heading          = 'Status Pendaftaran Saya';
 
     public function table(Table $table): Table
     {

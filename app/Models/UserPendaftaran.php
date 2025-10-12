@@ -3,11 +3,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Notifications\Notifiable;
 
 class UserPendaftaran extends User
 {
     /** @use HasFactory<\Database\Factories\UserPendaftaranFactory> */
-    use HasFactory;
+    use HasFactory, Notifiable;
     protected $table    = 'user_pendaftaran';
     protected $fillable = [
         'nama_lengkap',

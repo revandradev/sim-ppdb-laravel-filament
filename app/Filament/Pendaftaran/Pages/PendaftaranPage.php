@@ -109,8 +109,8 @@ class PendaftaranPage extends Page
     }
     public function save(): void
     {
-        $data = $this->form->getState();
-
+        $data   = $this->form->getState();
+        $user   = Auth::user();
         $record = $this->getRecord();
 
         if (! $record) {
@@ -127,7 +127,7 @@ class PendaftaranPage extends Page
 
         Notification::make()
             ->success()
-            ->title('Saved')
+            ->title('Data diri berhasil diperbarui')
             ->send();
     }
     public function getRecord(): ?Pendaftaran
