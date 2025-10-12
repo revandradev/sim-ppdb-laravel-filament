@@ -14,6 +14,7 @@ class CreateSiswa extends CreateRecord
         if (isset($data['pendaftaran_id'])) {
             $data['nama_lengkap'] = Pendaftaran::find($data['pendaftaran_id'])?->nama_lengkap;
         }
+        Pendaftaran::where('id', $data['pendaftaran_id'])->update(['is_approved' => true]);
         return $data;
     }
 }

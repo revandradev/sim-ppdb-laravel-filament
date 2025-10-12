@@ -68,6 +68,7 @@ class SiswaForm
                     )
                     ->disabled(fn($record) => $record !== null)
                     ->searchable()
+                    ->dehydrated(true)
                     ->required(),
                 Select::make('tahun_masuk')
                     ->label('Tahun Masuk')
