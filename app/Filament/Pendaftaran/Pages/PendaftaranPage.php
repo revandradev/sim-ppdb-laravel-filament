@@ -125,10 +125,15 @@ class PendaftaranPage extends Page
             $this->form->record($record)->saveRelationships();
         }
 
+        // Notification::make()
+        //     ->success()
+        //     ->title('Data diri berhasil diperbarui')
+        //     ->send();
+        $recipient = Auth::user();
         Notification::make()
             ->success()
             ->title('Data diri berhasil diperbarui')
-            ->send();
+            ->broadcast($recipient);
     }
     public function getRecord(): ?Pendaftaran
     {
