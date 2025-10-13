@@ -17,10 +17,12 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class TahunMasukResource extends Resource
 {
-    protected static ?string $model = TahunMasuk::class;
+    protected static ?string $model                            = TahunMasuk::class;
+    protected static string|UnitEnum|null $navigationGroup = 'Master Data';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -47,6 +49,7 @@ class TahunMasukResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->description('Hanya satu tahun masuk yang aktif')
             ->columns([
                 TextColumn::make('tahun')
                     ->label('Tahun Masuk')

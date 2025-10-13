@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('backoffice')
             ->databaseNotifications()
             ->profile(isSimple: false)
             ->login()

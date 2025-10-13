@@ -25,10 +25,12 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class TarifResource extends Resource
 {
-    protected static ?string $model = Tarif::class;
+    protected static ?string $model                            = Tarif::class;
+    protected static string|UnitEnum|null $navigationGroup = 'Master Data';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 

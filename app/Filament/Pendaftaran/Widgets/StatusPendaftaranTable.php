@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Widgets;
+namespace App\Filament\Pendaftaran\Widgets;
 
 use App\Models\Pendaftaran;
 use Filament\Actions\BulkActionGroup;

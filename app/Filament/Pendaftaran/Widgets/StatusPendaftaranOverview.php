@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Widgets;
+namespace App\Filament\Pendaftaran\Widgets;
 
 use App\Models\Pendaftaran;
 use App\Models\TahunMasuk;
@@ -16,7 +16,7 @@ class StatusPendaftaranOverview extends StatsOverviewWidget
         $status               = $pendaftaran ? $pendaftaran->status_verifikasi : "Belum mendaftar";
         $deskripsi            = $pendaftaran ? ($pendaftaran->is_verified == true ? "Pendaftaran anda sudah terverifikasi" : "Pendaftaran anda belum diverifikasi") : "Pendaftaran tidak ditemukan";
         $diterima             = $pendaftaran ? $pendaftaran->status_approval : "Belum mendaftar";
-        $deskripsiDiterima    = $pendaftaran ? ($pendaftaran->is_approval == true ? "Selamat, anda diterima" : "menunggu hasil pengumuman") : "Pendaftaran tidak ditemukan";
+        $deskripsiDiterima    = $pendaftaran ? ($pendaftaran->is_approved == true ? "Selamat, anda diterima" : "menunggu hasil pengumuman") : "Pendaftaran tidak ditemukan";
         $pembukaanPendaftaran = TahunMasuk::query()->where('is_aktif', true)->first();
         return [
             Stat::make('Status Pendaftaran', $status)

@@ -1,8 +1,8 @@
 <?php
 namespace App\Providers\Filament;
 
-use App\Filament\Widgets\StatusPendaftaranOverview;
-use App\Filament\Widgets\StatusPendaftaranTable;
+use App\Filament\Pendaftaran\Widgets\StatusPendaftaranOverview;
+use App\Filament\Pendaftaran\Widgets\StatusPendaftaranTable;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -28,6 +28,7 @@ class PendaftaranPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->brandName('Penerimaan Siswa Baru')
             ->login()
             ->registration()
             ->profile(isSimple: false)
