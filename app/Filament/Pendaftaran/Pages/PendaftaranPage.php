@@ -2,6 +2,7 @@
 namespace App\Filament\Pendaftaran\Pages;
 
 use App\Models\Pendaftaran;
+use App\Models\User;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
@@ -125,14 +126,15 @@ class PendaftaranPage extends Page
             $this->form->record($record)->saveRelationships();
         }
 
-        // Notification::make()
-        //     ->success()
-        //     ->title('Data diri berhasil diperbarui')
-        //     ->send();
-        $recipient = Auth::user();
         Notification::make()
             ->success()
             ->title('Data diri berhasil diperbarui')
+            ->send();
+        // $recipient = Auth::user();
+        $recipient = User::query()->where('email', 'admin@example.com')->first();
+        Notification::make()
+            ->success()
+            ->title("Data diri {$user->nama_lengkap} berhasil diperbarui")
             ->broadcast($recipient);
     }
     public function getRecord(): ?Pendaftaran

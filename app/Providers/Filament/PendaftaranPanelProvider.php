@@ -58,6 +58,11 @@ class PendaftaranPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->authGuard('user_pendaftaran');
+            ->authGuard('user_pendaftaran')
+            // ->assets([
+            //     Js::make('app-js', 'build/assets/app.js'),
+            //     Css::make('app-css', 'build/assets/app.css'),
+            // ])
+        ;
     }
 }
