@@ -10,6 +10,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\Support\Assets\Js;
 use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -59,6 +60,10 @@ class PendaftaranPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->authGuard('user_pendaftaran')
+            ->assets([
+                Js::make('server-js', resource_path('js/service-worker.js')), // pastikan path sesuai hasil build Vite
+            ])
+
             // ->assets([
             //     Js::make('app-js', 'build/assets/app.js'),
             //     Css::make('app-css', 'build/assets/app.css'),
