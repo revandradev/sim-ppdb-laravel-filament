@@ -130,7 +130,6 @@ class PendaftaranPage extends Page
             ->success()
             ->title('Data diri berhasil diperbarui')
             ->send();
-        // $recipient = Auth::user();
         $recipient = User::query()->where('email', 'admin@example.com')->first();
         Notification::make()
             ->success()
