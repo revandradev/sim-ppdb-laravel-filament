@@ -38,4 +38,8 @@ class Pendaftaran extends Model
     {
         return $this->is_approved ? 'Diterima' : 'Menunggu hasil';
     }
+    public function filePendaftaran()
+    {
+        return $this->hasMany(FilePendaftaran::class, 'user_pendaftaran_id');
+    }
 }
