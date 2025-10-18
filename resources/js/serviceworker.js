@@ -1,3 +1,4 @@
+console.log("Service Worker Loaded...");
 self.addEventListener("push", function (event) {
     let data = { title: "Notification", body: "Ada update", icon: "/icon.png" };
 

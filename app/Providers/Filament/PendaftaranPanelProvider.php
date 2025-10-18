@@ -10,8 +10,8 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Assets\Js;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -61,13 +61,13 @@ class PendaftaranPanelProvider extends PanelProvider
             ])
             ->authGuard('user_pendaftaran')
             ->assets([
-                Js::make('server-js', resource_path('js/service-worker.js')), // pastikan path sesuai hasil build Vite
+                // Js::make('serviceworker', resource_path('js/serviceworker.js')), // pastikan path sesuai hasil build Vite
+                // Js::make('subscriber', resource_path('js/subscriber.js')),       // pastikan path sesuai hasil build Vite
             ])
+            ->renderHook(
+                PanelsRenderHook::BODY_END,
+                fn() => '<script src="' . asset('subscriber.js') . '"></script>'
+            );
 
-            // ->assets([
-            //     Js::make('app-js', 'build/assets/app.js'),
-            //     Css::make('app-css', 'build/assets/app.css'),
-            // ])
-        ;
     }
 }

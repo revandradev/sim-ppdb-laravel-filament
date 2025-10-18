@@ -3,6 +3,8 @@ namespace App\Filament\Resources\TahunMasuks;
 
 use App\Filament\Resources\TahunMasuks\Pages\ManageTahunMasuks;
 use App\Models\TahunMasuk;
+use App\Models\UserPendaftaran;
+use App\Notifications\UpdatePendaftaran;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -17,6 +19,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Log;
 use UnitEnum;
 
 class TahunMasukResource extends Resource
@@ -33,7 +36,7 @@ class TahunMasukResource extends Resource
                 Grid::make()->columnSpanFull()->schema([
                     TextInput::make('tahun')
                         ->markAsRequired()
-                        ->rules(['required', 'max:4', 'numeric'])
+                        ->rules(['required', 'numeric'])
                         ->validationMessages([
                             'required' => 'Kolom :attribute wajib di isi',
                             'max'      => 'Maksimal :attribute adalah 4 karakter',
@@ -73,7 +76,11 @@ class TahunMasukResource extends Resource
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()->after(function () {
+                    $user = UserPendaftaran::query()->where('email', 'revandra@pendaftaran.com')->first();
+                    Log::info("Notifikasi dikirim ke: {$user->email}");
+                    $user->notify(new UpdatePendaftaran());
+                }),
                 DeleteAction::make(),
             ])
             ->toolbarActions([

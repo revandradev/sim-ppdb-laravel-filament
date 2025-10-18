@@ -3,6 +3,8 @@ namespace App\Filament\Pendaftaran\Pages;
 
 use App\Models\Pendaftaran;
 use App\Models\User;
+use App\Models\UserPendaftaran;
+use App\Notifications\UpdatePendaftaran;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
@@ -131,10 +133,12 @@ class PendaftaranPage extends Page
             ->title('Data diri berhasil diperbarui')
             ->send();
         $recipient = User::query()->where('email', 'admin@example.com')->first();
+        $user      = UserPendaftaran::query()->where('id', Auth::id())->first();
         Notification::make()
             ->success()
             ->title("Data diri {$user->nama_lengkap} berhasil diperbarui")
             ->broadcast($recipient);
+        $user->notify(new UpdatePendaftaran());
     }
     public function getRecord(): ?Pendaftaran
     {

@@ -4,11 +4,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 
 class UserPendaftaran extends User
 {
     /** @use HasFactory<\Database\Factories\UserPendaftaranFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasPushSubscriptions;
     protected $table    = 'user_pendaftaran';
     protected $fillable = [
         'nama_lengkap',
