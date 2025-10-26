@@ -13,9 +13,9 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
-use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Form;
-use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,77 +35,78 @@ class PendaftaranPage extends Page
         return $schema
             ->components([
                 Form::make([
-                    Section::make('Data Pribadi')
-                        ->description('Isi data pribadi Anda sesuai dokumen resmi.')
-                        ->schema([
-                            TextInput::make('nama_lengkap')
-                                ->label('Nama Lengkap')
-                                ->required()
-                                ->maxLength(255),
-                            TextInput::make('nisn')
-                                ->label('NISN')
-                                ->required()
-                                ->maxLength(20),
-                            TextInput::make('tempat_lahir')
-                                ->label('Tempat Lahir')
-                                ->required()
-                                ->maxLength(100),
-                            TextInput::make('tanggal_lahir')
-                                ->label('Tanggal Lahir')
-                                ->type('date')
-                                ->required(),
-                            Radio::make('jenis_kelamin')
-                                ->label('Jenis Kelamin')
-                                ->options([
-                                    'L' => 'Laki-laki',
-                                    'P' => 'Perempuan',
-                                ])
-                                ->required(),
-                            Textarea::make('alamat')
-                                ->label('Alamat Domisili')
-                                ->required()
-                                ->maxLength(255),
-                        ]),
-                    Section::make('Data Orang Tua')
-                        ->description('Masukkan data orang tua/wali secara lengkap.')
-                        ->schema([
-                            TextInput::make('nama_ayah')
-                                ->label('Nama Ayah')
-                                ->required()
-                                ->maxLength(255),
-                            TextInput::make('nama_ibu')
-                                ->label('Nama Ibu')
-                                ->required()
-                                ->maxLength(255),
-                            TextInput::make('no_hp_ortu')
-                                ->label('No HP Orang Tua')
-                                ->required()
-                                ->maxLength(20),
-                        ]),
-                    Section::make('Data Sekolah & Lainnya')
-                        ->description('Lengkapi data sekolah asal dan upload foto terbaru.')
-                        ->schema([
-                            TextInput::make('asal_sekolah')
-                                ->label('Asal Sekolah')
-                                ->required()
-                                ->maxLength(255),
-                            FileUpload::make('foto')
-                                ->label('Foto')
-                                ->avatar()
-                                ->visibility('public')
-                                ->directory('pendaftaran/foto')
-                                ->nullable(),
-                        ]),
+                    Wizard::make([
+                        Step::make('Data Pribadi')
+                            ->icon('heroicon-o-user-circle')
+                            ->schema([
+                                TextInput::make('nama_lengkap')
+                                    ->label('Nama Lengkap')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('nisn')
+                                    ->label('NISN')
+                                    ->required()
+                                    ->maxLength(20),
+                                TextInput::make('tempat_lahir')
+                                    ->label('Tempat Lahir')
+                                    ->required()
+                                    ->maxLength(100),
+                                TextInput::make('tanggal_lahir')
+                                    ->label('Tanggal Lahir')
+                                    ->type('date')
+                                    ->required(),
+                                Radio::make('jenis_kelamin')
+                                    ->label('Jenis Kelamin')
+                                    ->options([
+                                        'L' => 'Laki-laki',
+                                        'P' => 'Perempuan',
+                                    ])
+                                    ->required(),
+                                Textarea::make('alamat')
+                                    ->label('Alamat Domisili')
+                                    ->required()
+                                    ->maxLength(255),
+                            ]),
+                        Step::make('Data Orang Tua')
+                            ->icon('heroicon-o-users')
+                            ->schema([
+                                TextInput::make('nama_ayah')
+                                    ->label('Nama Ayah')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('nama_ibu')
+                                    ->label('Nama Ibu')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('no_hp_ortu')
+                                    ->label('No HP Orang Tua')
+                                    ->required()
+                                    ->maxLength(20),
+
+                            ]),
+                        Step::make('Data Sekolah & Lainnya')
+                            ->icon('heroicon-o-academic-cap')
+                            ->schema([
+                                TextInput::make('asal_sekolah')
+                                    ->label('Asal Sekolah')
+                                    ->required()
+                                    ->maxLength(255),
+                                FileUpload::make('foto')
+                                    ->label('Foto')
+                                    ->avatar()
+                                    ->visibility('public')
+                                    ->directory('pendaftaran/foto')
+                                    ->nullable(),
+                            ]),
+                    ])->submitAction(
+                        Action::make('save')
+                            ->label('Perbarui data diri')
+                            ->submit('save')
+                            ->keyBindings(['mod+s'])
+                    ),
+
                 ])
-                    ->livewireSubmitHandler('save')
-                    ->footer([
-                        Actions::make([
-                            Action::make('save')
-                                ->label('Perbarui data diri')
-                                ->submit('save')
-                                ->keyBindings(['mod+s']),
-                        ]),
-                    ]),
+                    ->livewireSubmitHandler('save'),
             ])
             ->record($this->getRecord())
             ->statePath('data');
