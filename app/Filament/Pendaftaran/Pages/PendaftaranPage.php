@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 class PendaftaranPage extends Page
 {
     protected string $view                                      = 'filament.pendaftaran.pages.pendaftaran-page';
-    protected static ?string $title                             = 'Data diri';
+    protected static ?string $title                             = 'Pendaftaran';
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
     public ?array $data                                         = [];
 
@@ -129,12 +129,20 @@ class PendaftaranPage extends Page
                     ])->submitAction(
                         Action::make('save')
                             ->label('Perbarui data diri')
-                            ->submit('save')
+                            ->color('primary')
+                            ->requiresConfirmation()
+                            ->modalHeading('Konfirmasi penyimpanan')
+                            ->modalDescription('Yakin ingin menyimpan perubahan data?')
+                            ->modalSubmitActionLabel('Simpan')
+                        // ->modalIcon(\Filament\Support\Icons\Heroicon::oQuestionMarkCircle) // opsional
+                        // ->disabled(fn(): bool => $this->getRecord()?->is_submitted ?? false)
+                        // ->submit('save')
+                            ->action('save')
                             ->keyBindings(['mod+s'])
                     ),
 
-                ])
-                    ->livewireSubmitHandler('save'),
+                ]),
+                // ->livewireSubmitHandler('save'),
             ])
             ->record($this->getRecord())
             ->statePath('data');
@@ -149,7 +157,8 @@ class PendaftaranPage extends Page
             $record                      = new Pendaftaran();
             $record->user_pendaftaran_id = Auth::id();
         }
-
+        // $data['is_submitted'] = true;
+        // dd($data);
         $record->fill($data);
         $record->save();
 

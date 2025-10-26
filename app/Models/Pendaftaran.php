@@ -23,6 +23,12 @@ class Pendaftaran extends Model
         'asal_sekolah',
         'foto',
         'user_pendaftaran_id',
+        'alamat_sekolah_sebelumnya',
+        'akte_kelahiran',
+        'kartu_keluarga',
+        'rapor_terakhir',
+        'ijazah',
+        'is_submitted',
         'is_verified',
     ];
 
