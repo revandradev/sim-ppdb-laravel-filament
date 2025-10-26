@@ -91,11 +91,39 @@ class PendaftaranPage extends Page
                                     ->label('Asal Sekolah')
                                     ->required()
                                     ->maxLength(255),
+                                Textarea::make('alamat_sekolah_sebelumnya')
+                                    ->label('Alamat Sekolah Sebelumnya')
+                                    ->required()
+                                    ->rows(4)
+                                    ->maxLength(255),
+                            ]),
+                        Step::make('Berkas pendaftaran')
+                            ->icon('heroicon-o-check-circle')
+                            ->schema([
                                 FileUpload::make('foto')
                                     ->label('Foto')
-                                    ->avatar()
                                     ->visibility('public')
                                     ->directory('pendaftaran/foto')
+                                    ->nullable(),
+                                FileUpload::make('akte_kelahiran')
+                                    ->label('Akte Kelahiran')
+                                    ->visibility('public')
+                                    ->directory('pendaftaran/akte_kelahiran')
+                                    ->nullable(),
+                                FileUpload::make('kartu_keluarga')
+                                    ->label('Kartu Keluarga')
+                                    ->visibility('public')
+                                    ->directory('pendaftaran/kartu_keluarga')
+                                    ->nullable(),
+                                FileUpload::make('rapor_terakhir')
+                                    ->label('Rapor Terakhir')
+                                    ->visibility('public')
+                                    ->directory('pendaftaran/rapor_terakhir')
+                                    ->nullable(),
+                                FileUpload::make('ijazah')
+                                    ->label('Ijazah')
+                                    ->visibility('public')
+                                    ->directory('pendaftaran/ijazah')
                                     ->nullable(),
                             ]),
                     ])->submitAction(
