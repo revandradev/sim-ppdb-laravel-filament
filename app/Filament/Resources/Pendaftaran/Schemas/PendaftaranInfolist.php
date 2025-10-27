@@ -2,9 +2,14 @@
 namespace App\Filament\Resources\Pendaftaran\Schemas;
 
 use App\Models\Pendaftaran;
+use Filament\Actions\Action;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Storage;
+use Joaopaulolndev\FilamentPdfViewer\Infolists\Components\PdfViewerEntry;
 
 class PendaftaranInfolist
 {
@@ -32,8 +37,6 @@ class PendaftaranInfolist
                         TextEntry::make('asal_sekolah'),
                         TextEntry::make('alamat_sekolah_sebelumnya')
                             ->placeholder('-'),
-
-// Status
                         TextEntry::make('is_submitted')
                             ->label('Status Pengajuan')
                             ->badge()
@@ -55,18 +58,31 @@ class PendaftaranInfolist
                             ->placeholder('-'),
                     ]),
                 Section::make('Berkas')
-                    ->columns(2)
+                    ->columns(1)
                     ->schema([
-                        TextEntry::make('foto')
-                            ->placeholder('-'),
-                        TextEntry::make('akte_kelahiran')
-                            ->placeholder('-'),
-                        TextEntry::make('kartu_keluarga')
-                            ->placeholder('-'),
-                        TextEntry::make('rapor_terakhir')
-                            ->placeholder('-'),
-                        TextEntry::make('ijazah')
-                            ->placeholder('-'),
+                        ImageEntry::make('foto')
+                            ->placeholder('-')
+                            ->imageHeight('200px'),
+                        Actions::make([
+                            Action::make('download_image')
+                                ->label('Download Image')
+                                                                                              // ->icon('heroicon-o-download')
+                                ->url(fn($record) => Storage::disk('public')->url($record->foto)) // Generate URL
+                                ->openUrlInNewTab(),
+                        ]),
+
+                        PdfViewerEntry::make('akte_kelahiran')
+                            ->placeholder('-')
+                            ->minHeight('40svh'),
+                        PdfViewerEntry::make('kartu_keluarga')
+                            ->placeholder('-')
+                            ->minHeight('40svh'),
+                        PdfViewerEntry::make('rapor_terakhir')
+                            ->placeholder('-')
+                            ->minHeight('40svh'),
+                        PdfViewerEntry::make('ijazah')
+                            ->placeholder('-')
+                            ->minHeight('40svh'),
                     ]),
             ]);
     }
