@@ -17,6 +17,7 @@ class Pendaftaran extends Model
         'tanggal_lahir',
         'jenis_kelamin',
         'alamat',
+        'alamat_domisili',
         'nama_ayah',
         'nama_ibu',
         'no_hp_ortu',

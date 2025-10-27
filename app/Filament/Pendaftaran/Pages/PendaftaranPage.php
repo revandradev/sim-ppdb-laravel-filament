@@ -69,8 +69,14 @@ class PendaftaranPage extends Page
                                     ])
                                     ->required(),
                                 Textarea::make('alamat')
+                                    ->label('Alamat')
+                                    ->required()
+                                    ->rows(4)
+                                    ->maxLength(255),
+                                Textarea::make('alamat_domisili')
                                     ->label('Alamat Domisili')
                                     ->required()
+                                    ->rows(4)
                                     ->maxLength(255),
                             ]),
                         Step::make('Data Orang Tua')
