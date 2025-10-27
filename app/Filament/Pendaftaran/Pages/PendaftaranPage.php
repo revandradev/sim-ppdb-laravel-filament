@@ -139,16 +139,6 @@ class PendaftaranPage extends Page
                                         'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
                                     ])
                                     ->nullable(),
-                                // FileUpload::make('kartu_keluarga')
-                                //     ->label('Kartu Keluarga Terbaru')
-                                //     ->visibility('public')
-                                //     ->directory('pendaftaran/kartu_keluarga')
-                                //     ->acceptedFileTypes(['application/pdf'])
-                                //     ->belowContent([
-                                //         Icon::make(Heroicon::InformationCircle),
-                                //         'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
-                                //     ])
-                                //     ->nullable(),
                                 FileUpload::make('rapor_terakhir')
                                     ->label('Rapor Terakhir')
                                     ->visibility('public')
@@ -158,6 +148,7 @@ class PendaftaranPage extends Page
                                         Icon::make(Heroicon::InformationCircle),
                                         'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
                                     ])
+                                    ->openable()
                                     ->nullable(),
                                 FileUpload::make('ijazah')
                                     ->label('Ijazah')
@@ -168,6 +159,7 @@ class PendaftaranPage extends Page
                                         Icon::make(Heroicon::InformationCircle),
                                         'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
                                     ])
+                                    ->openable()
                                     ->nullable(),
                             ]),
                         Step::make('Konfirmasi')
