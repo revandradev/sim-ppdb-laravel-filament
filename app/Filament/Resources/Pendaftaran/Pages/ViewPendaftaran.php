@@ -2,7 +2,6 @@
 namespace App\Filament\Resources\pendaftaran\Pages;
 
 use App\Filament\Resources\pendaftaran\PendaftaranResource;
-use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewPendaftaran extends ViewRecord
@@ -12,7 +11,7 @@ class ViewPendaftaran extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            // EditAction::make(),
         ];
     }
 }

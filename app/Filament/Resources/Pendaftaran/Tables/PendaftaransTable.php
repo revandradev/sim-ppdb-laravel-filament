@@ -5,7 +5,6 @@ use App\Models\UserPendaftaran;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
@@ -76,7 +75,7 @@ class pendaftaranTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                // EditAction::make(),
                 Action::make('verifikasi')
                     ->label(fn($record) => $record->is_verified ? 'Batalkan Verifikasi' : 'Verifikasi')
                     ->color(fn($record) => $record->is_verified ? 'warning' : 'success')
