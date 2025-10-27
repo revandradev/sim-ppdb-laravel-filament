@@ -60,10 +60,7 @@ class PendaftaranPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->authGuard('user_pendaftaran')
-            ->assets([
-                // Js::make('serviceworker', resource_path('js/serviceworker.js')), // pastikan path sesuai hasil build Vite
-                // Js::make('subscriber', resource_path('js/subscriber.js')),       // pastikan path sesuai hasil build Vite
-            ])
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->renderHook(
                 PanelsRenderHook::BODY_END,
                 fn() => '<script src="' . asset('subscriber.js') . '"></script>'

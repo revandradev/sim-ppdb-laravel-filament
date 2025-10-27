@@ -5,3 +5,4 @@
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
 @source '../../../../vendor/devonab/filament-easy-footer/resources/views/**/*';
+@source '../../../../vendor/awcodes/shout/resources/**/*.blade.php';

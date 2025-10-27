@@ -5,6 +5,9 @@ use App\Models\Pendaftaran;
 use App\Models\User;
 use App\Models\UserPendaftaran;
 use App\Notifications\UpdatePendaftaran;
+use Asmit\FilamentUpload\Enums\PdfViewFit;
+use Asmit\FilamentUpload\Forms\Components\AdvancedFileUpload;
+use Awcodes\Shout\Components\Shout;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
@@ -14,9 +17,12 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Form;
+use Filament\Schemas\Components\Icon;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
+use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Auth;
 
 class PendaftaranPage extends Page
@@ -98,47 +104,100 @@ class PendaftaranPage extends Page
                                     ->maxLength(255),
                             ]),
                         Step::make('Berkas pendaftaran')
-                            ->icon('heroicon-o-check-circle')
+                            ->icon('heroicon-o-arrow-up-on-square')
                             ->schema([
                                 FileUpload::make('foto')
                                     ->label('Foto')
                                     ->visibility('public')
                                     ->directory('pendaftaran/foto')
+                                    ->openable()
                                     ->nullable(),
                                 FileUpload::make('akte_kelahiran')
                                     ->label('Akte Kelahiran')
                                     ->visibility('public')
                                     ->directory('pendaftaran/akte_kelahiran')
+                                    ->openable()
+                                    ->acceptedFileTypes(['application/pdf'])
+                                    ->belowContent([
+                                        Icon::make(Heroicon::InformationCircle),
+                                        'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
+                                    ])
                                     ->nullable(),
-                                FileUpload::make('kartu_keluarga')
-                                    ->label('Kartu Keluarga')
+                                AdvancedFileUpload::make('kartu_keluarga')
+                                    ->label('Kartu Keluarga Terbaru')
+                                    ->pdfPreviewHeight(400)       // Customize preview height
+                                    ->pdfDisplayPage(1)           // Set default page
+                                    ->pdfToolbar(true)            // Enable toolbar
+                                    ->pdfZoomLevel(100)           // Set zoom level
+                                    ->pdfFitType(PdfViewFit::FIT) // Set fit type
+                                    ->pdfNavPanes(true)           // Enable navigation panes
                                     ->visibility('public')
-                                    ->directory('pendaftaran/kartu_keluarga')
+                                    ->directory('pendaftaran/akte_kelahiran')
+                                    ->acceptedFileTypes(['application/pdf'])
+                                    ->belowContent([
+                                        Icon::make(Heroicon::InformationCircle),
+                                        'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
+                                    ])
                                     ->nullable(),
+                                // FileUpload::make('kartu_keluarga')
+                                //     ->label('Kartu Keluarga Terbaru')
+                                //     ->visibility('public')
+                                //     ->directory('pendaftaran/kartu_keluarga')
+                                //     ->acceptedFileTypes(['application/pdf'])
+                                //     ->belowContent([
+                                //         Icon::make(Heroicon::InformationCircle),
+                                //         'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
+                                //     ])
+                                //     ->nullable(),
                                 FileUpload::make('rapor_terakhir')
                                     ->label('Rapor Terakhir')
                                     ->visibility('public')
                                     ->directory('pendaftaran/rapor_terakhir')
+                                    ->acceptedFileTypes(['application/pdf'])
+                                    ->belowContent([
+                                        Icon::make(Heroicon::InformationCircle),
+                                        'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
+                                    ])
                                     ->nullable(),
                                 FileUpload::make('ijazah')
                                     ->label('Ijazah')
                                     ->visibility('public')
                                     ->directory('pendaftaran/ijazah')
+                                    ->acceptedFileTypes(['application/pdf'])
+                                    ->belowContent([
+                                        Icon::make(Heroicon::InformationCircle),
+                                        'Hanya file PDF yang diizinkan, maksimal ukuran 2MB.',
+                                    ])
                                     ->nullable(),
+                            ]),
+                        Step::make('Konfirmasi')
+                            ->icon('heroicon-o-check-badge')
+                            ->schema([
+                                Shout::make('final-step')
+                                    ->heading('Konfirmasi dan Kirim')
+                                    ->content('Pastikan semua data yang Anda masukkan sudah benar sebelum mengirimkan formulir pendaftaran.')
+                                    ->icon('heroicon-o-exclamation-circle')
+                                    ->color(Color::Yellow)
+                                    ->columnSpanFull(),
+                                Radio::make('is_submitted')
+                                    ->label('Saya menyatakan bahwa data yang saya isi adalah benar dan saya setuju untuk melanjutkan proses pendaftaran.')
+                                    ->options([
+                                        0 => 'Tunggu',
+                                        1 => 'Setuju',
+                                    ])
+                                    ->descriptions([
+                                        0 => 'Data Anda akan disimpan sebagai draf dan Anda dapat mengeditnya kembali sebelum mengirimkan.',
+                                        1 => 'Dengan memilih ini, Anda menyetujui bahwa data yang Anda berikan adalah benar dan siap untuk diproses lebih lanjut.',
+                                    ])
+                                    ->required(),
                             ]),
                     ])->submitAction(
                         Action::make('save')
-                            ->label('Perbarui data diri')
+                            ->label('Simpan')
                             ->color('primary')
-                            ->requiresConfirmation()
-                            ->modalHeading('Konfirmasi penyimpanan')
-                            ->modalDescription('Yakin ingin menyimpan perubahan data?')
-                            ->modalSubmitActionLabel('Simpan')
-                        // ->modalIcon(\Filament\Support\Icons\Heroicon::oQuestionMarkCircle) // opsional
-                        // ->disabled(fn(): bool => $this->getRecord()?->is_submitted ?? false)
-                        // ->submit('save')
+                            ->disabled(fn(): bool => $this->getRecord()?->is_submitted ?? false)
                             ->action('save')
-                            ->keyBindings(['mod+s'])
+                            ->keyBindings(['mod+s']),
                     ),
 
                 ]),
@@ -157,8 +216,6 @@ class PendaftaranPage extends Page
             $record                      = new Pendaftaran();
             $record->user_pendaftaran_id = Auth::id();
         }
-        // $data['is_submitted'] = true;
-        // dd($data);
         $record->fill($data);
         $record->save();
 
