@@ -66,7 +66,6 @@ class PendaftaranInfolist
                         Actions::make([
                             Action::make('download_image')
                                 ->label('Download Image')
-                                                                                              // ->icon('heroicon-o-download')
                                 ->url(fn($record) => Storage::disk('public')->url($record->foto)) // Generate URL
                                 ->openUrlInNewTab(),
                         ]),
