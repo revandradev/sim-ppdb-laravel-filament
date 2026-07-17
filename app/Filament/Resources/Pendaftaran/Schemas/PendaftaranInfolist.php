@@ -66,10 +66,9 @@ class PendaftaranInfolist
                         Actions::make([
                             Action::make('download_image')
                                 ->label('Download Image')
-                                ->url(fn($record) => Storage::disk('public')->url($record->foto)) // Generate URL
+                                ->url(fn($record) => Storage::url($record->foto))
                                 ->openUrlInNewTab(),
                         ]),
-
                         PdfViewerEntry::make('akte_kelahiran')
                             ->placeholder('-')
                             ->minHeight('40svh'),
