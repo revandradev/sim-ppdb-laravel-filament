@@ -7,19 +7,37 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Laravel Filament Socialite Boilerplate
+# PPDB — Penerimaan Peserta Didik Baru
 
-Boilerplate aplikasi Laravel dengan Filament Admin Panel, Socialite login, dan integrasi Spatie Settings. Cocok untuk pengembangan backoffice modern dengan autentikasi sosial dan pengaturan dinamis.
+Aplikasi **Penerimaan Siswa Sekolah (PPDB)** berbasis Laravel dengan Filament Admin Panel, Socialite login, dan integrasi Spatie Settings. Aplikasi ini digunakan untuk mengelola proses pendaftaran siswa baru secara digital, mulai dari pengisian formulir pendaftaran, verifikasi berkas, seleksi, hingga pelaporan.
+
+## Informasi untuk Developer
+
+Aplikasi ini adalah sistem penerimaan peserta didik baru (_student admission_) yang mencakup fitur:
+
+- **Pendaftaran Siswa** — Formulir pendaftaran online dengan upload dokumen (KK, akta, ijazah, dll.)
+- **Verifikasi & Seleksi** — Panel admin untuk memverifikasi berkas dan menyeleksi calon siswa
+- **Manajemen Data Master** — Kelola data sekolah, jurusan, tahun ajaran, dan lain-lain
+- **Pelaporan** — Ekspor data pendaftar dan laporan statistik
+
+## Stack Teknologi
+
+- **Backend:** Laravel 12, PHP 8.3
+- **Admin Panel:** Filament v4
+- **Frontend:** Livewire 3, Alpine.js, Tailwind CSS v4
+- **Auth:** Socialite (Google), Filament Shield (RBAC)
+- **Settings:** Spatie Settings (konfigurasi dinamis)
 
 ## Fitur Utama
 
-- Filament Admin Panel v4
-- Login dengan Socialite (Google, dll)
-- Manajemen pengguna dan hak akses (Filament Shield)
-- Pengaturan aplikasi dinamis (Spatie Settings)
+- Filament Admin Panel v4 untuk backoffice
+- Login dengan Socialite (Google) dan email/password
+- Manajemen pengguna dan hak akses berbasis role (Filament Shield)
+- Pengaturan aplikasi dinamis via panel admin (Spatie Settings)
 - Upload logo & favicon dari panel
+- Formulir pendaftaran siswa dengan upload dokumen
+- PDF viewer untuk preview dokumen pendaftar
 - Footer custom dan lockscreen
-- Struktur siap pakai untuk resource, page, dan widget
 
 ## Instalasi
 
@@ -64,10 +82,14 @@ Boilerplate aplikasi Laravel dengan Filament Admin Panel, Socialite login, dan i
   Buka `http://localhost:8000/admin`
 - **Login:**  
   Bisa menggunakan email/password atau Socialite (Google).
+- **Pendaftaran:**  
+  Resource "Pendaftaran" untuk melihat dan mengelola data calon siswa yang sudah mendaftar.
+- **Verifikasi berkas:**  
+  Panel admin menyediakan PDF viewer untuk melihat dokumen pendaftar (KK, akta, ijazah, dll.).
 - **Pengaturan aplikasi:**  
-  Menu "Pengaturan" di sidebar untuk mengubah nama situs, logo, favicon, dan deskripsi.
+  Menu "Pengaturan" di sidebar untuk mengubah nama situs, logo, favicon, dan deskripsi termasuk info PPDB (tahun ajaran, jadwal, dll.).
 - **Manajemen pengguna:**  
-  Menu "Pengguna" untuk CRUD user dan pengaturan role.
+  Menu "Pengguna" untuk CRUD user dan pengaturan role (admin, panitia, dll.).
 - **Footer & lockscreen:**  
   Fitur tambahan untuk keamanan dan branding.
 
